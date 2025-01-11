@@ -1,0 +1,56 @@
+Optimal Approach     TC-O(N)  SC-O(1)
+
+class Solution {
+public:
+    bool canConstruct(string s, int k) {
+        //sabse phle string ki length nikal lo
+        int n=s.size();
+
+        //agr string ki length k se kam hui to 
+        //us case me possible hi nhi hai
+        if(n<k)
+        {
+            return false;
+        }
+
+        //agr string ki length k ke equal ho gai
+        //to possible hai k palindromic strings
+        if(n==k)
+        {
+            return true;
+        }
+
+        //ab bacha 3rd and last case jo ki 
+        //hame handle karna hai(n>k)
+        
+        //sabse pahle 1 vector bana lo 26 size ka
+        //sabhi elements ko starting me hi 0 
+        //se  initialize kar do
+        vector <int> vec(26,0);
+
+        //ab string me traverse karke sabhi chars
+        //ke count ko increase kar do
+        for(char &ch : s)
+        {
+            vec[ch-'a']++;
+        }
+
+        //ye variable oddfrequency ke jitne bhi
+        //character honge unko count karega
+        int oddFreqCharCount=0;
+
+        // ab vector me traverse 
+        // karke oddFreqCharCount nikalo
+        for(int i=0;i<26;i++)
+        {
+            if(vec[i]%2 != 0)
+            {
+                oddFreqCharCount += 1;
+            }
+        }
+
+        //agr oddFreqCount<=k hua to possible hai
+        //k palindromic strings banana otherwise not
+        return oddFreqCharCount <=k;
+    }
+};
