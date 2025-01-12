@@ -1,0 +1,144 @@
+Bruteforce Approach      TC-O(N)      SC-O(1)
+
+class Solution {
+public:
+    bool canBeValid(string s, string locked) {
+        //sabse pahle string ki size nikal lo
+        int n=s.size();
+
+        //agr string odd length ki ho to return false
+        if(n%2 != 0)
+        {
+            return false;
+        }
+
+        //ab 2 stacks le lo 
+        //isme hum normal open bracket push karenge
+        stack <int> open;
+        //isme hum aise bracket push karenge jo change ho
+        //skte hain
+        stack <int> openClose;
+
+        //ab loop run kar lo
+        for(int i=0;i<n;i++)
+        {
+            //agr locked[i]==0 ke equal hai to uske index 
+            // ko openClose me dal do
+            if(locked[i]=='0')
+            {
+                openClose.push(i);
+            }
+
+            //agr s[i]=='(' hai to uske stack ke index ko
+            // open stack me dalo
+            else if(s[i]=='(')
+            {
+                open.push(i);
+            }
+
+            //ab agr s[i]==')' hua to 
+            else if(s[i]==')')
+            {
+                //phle open me check karo ki koi 
+                //corresponding open bracket hai kya
+                if(!open.empty())
+                {
+                    open.pop();
+                }
+                //ab openClose me check karo ki koi 
+                //bracket hai kya(open ya close dono)
+                else if(!openClose.empty())
+                {
+                    openClose.pop();
+                }
+                //agr in dono jgh hi nhi milta bracket
+                //to confirm ab balance nhi ho skta
+                else
+                {
+                    return false;
+                }
+            } 
+        }
+        //ab ye check karo kya kuch elements(brackets) bach
+        //gye hain kya open ya fir openClose me
+        //unko 1-1 karke pop karao aur ye dhyan rhe ki
+        //open ka index hmesha close se kam rhe
+        while(!open.empty() && !openClose.empty() &&
+              open.top() < openClose.top() )
+        {
+            open.pop();
+            openClose.pop();
+        }
+        //agr open stack empty ho chuka hai to confirm 
+        //balance ho jayega
+        return open.empty();
+    }
+};
+
+
+Optimal Approach        TC-O(N)      SC-O(1)
+
+class Solution {
+public:
+    bool canBeValid(string s, string locked) {
+        //sabse pahle string ki size nikal lo
+        int n=s.size();
+
+        //agr string ki length odd ho to
+        //false return kar do
+        if(n%2 != 0)
+        {
+            return false;
+        }
+
+        //Ab left -> right traverse karo
+        //ye varibale open bracket ke count ka 
+        //track rakhega
+        int open=0;
+
+        for(int i=0;i<n;i++)
+        {
+            //agr open bracket hua ya for '0' hua to
+            //us case me count++ karo
+            if(s[i]=='(' || locked[i]=='0')
+            {
+                open += 1;
+            }
+            //agr 1 hua to 
+            else
+            {
+                open -= 1;
+            }
+
+            if(open < 0)
+            {
+                return false;
+            }
+        } 
+ 
+        //Ab right -> left traverse karo
+        //ye varibale close bracket ke count ka 
+        //track rakhega
+        int close=0;
+
+        for(int i=n-1;i>=0;i--)
+        {
+            //agr close bracket mila ya fir 0 mila to
+            if(s[i]==')' || locked[i]=='0')
+            {
+                close += 1;
+            }
+            //agr 1 mila to
+            else
+            {
+                close -= 1;
+            }
+
+            if(close < 0)
+            {
+                return false;
+            }
+        } 
+      return true;  
+    }
+};
