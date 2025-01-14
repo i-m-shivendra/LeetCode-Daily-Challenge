@@ -1,0 +1,84 @@
+Bruteforce Approach   TC-O(n^3)    SC-O(1)
+
+class Solution {
+public:
+    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+        int n=A.size();
+
+        vector <int> ans(n);
+
+        for(int i=0;i<n;i++)
+        {
+            int count=0;
+            for(int x=0;x<=i;x++)
+            {
+                for(int y=0;y<=i;y++)
+                {
+                    if(A[x]==B[y])
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            ans[i]=count;
+        }
+        return ans;
+    }
+};
+
+Better Solution       TC - O(N^2)           SC-O(N)
+
+        // int n=A.size();
+        // vector <int> result(n);
+
+        // vector <bool> isPresentA(n+1,false);
+        // vector <bool> isPresentB(n+1,false);
+
+        // for(int i=0;i<n;i++)
+        // {
+        //     int count=0;
+        //     isPresentA[A[i]]=true;
+        //     isPresentB[B[i]]=true;
+
+        //     for(int j=1;j<=n;j++)
+        //     {
+        //         if(isPresentA[j]==true && 
+        //            isPresentB[j]==true)
+        //         {
+        //             count++;
+        //         }
+        //     }
+        //     result[i] = count;
+        // }
+        // return result;   
+
+
+Best Approach   TC - O(N)     Sc-O(N)
+
+int n=A.size();
+
+        vector <int> result(n);
+
+        unordered_map <int ,int> mp;
+        
+        int count=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            mp[A[i]]++;
+
+            if(mp[A[i]] == 2)
+            {
+                count++;
+            }
+
+            mp[B[i]]++;
+
+            if(mp[B[i]] == 2)
+            {
+                count++;
+            }
+            result[i]=count;
+        }
+        return result;
