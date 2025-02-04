@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxAscendingSum(vector<int>& nums) {
-        int n=nums.size();
+        int n = nums.size();
 
         int maxSum = 0;
 
@@ -9,13 +9,11 @@ public:
         {
             int currSum = nums[i];
 
-            int j = i+1;
-
-            while(j < n && nums[j] > nums[j-1])
+            for(int j=i+1;j<n && nums[j]>nums[j-1];j++)
             {
                 currSum += nums[j];
-                j++;
             }
+
             maxSum = max(maxSum,currSum);
         }
         return maxSum;
