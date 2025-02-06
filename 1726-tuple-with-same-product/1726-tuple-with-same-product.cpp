@@ -10,14 +10,20 @@ public:
         {
             for(int j=n-1;j>i;j--)
             {
+                int product = nums[i] * nums[j];
+                unordered_set <int> st;
+
                 for(int k=i+1;k<j;k++)
                 {
-                    for(int l=j-1;l>k;l--)
+                    if(product % nums[k] == 0)
                     {
-                        if(nums[i]*nums[j] == nums[k]*nums[l])
-                            {
-                                count += 1;
-                            }
+                        int d = product / nums[k];
+
+                        if(st.count(d))
+                        {
+                            count++;
+                        }
+                        st.insert(nums[k]);
                     }
                 }
             }
