@@ -4,29 +4,23 @@ public:
         int n = nums.size();
         int count = 0;
 
-        sort(nums.begin(),nums.end());
+        unordered_map <int,int> mp;
 
         for(int i=0;i<n;i++)
         {
-            for(int j=n-1;j>i;j--)
+            for(int j=i+1;j<n;j++)
             {
                 int product = nums[i] * nums[j];
-                unordered_set <int> st;
-
-                for(int k=i+1;k<j;k++)
-                {
-                    if(product % nums[k] == 0)
-                    {
-                        int d = product / nums[k];
-
-                        if(st.count(d))
-                        {
-                            count++;
-                        }
-                        st.insert(nums[k]);
-                    }
-                }
+                mp[product]++;
             }
+        }
+
+        for(auto &it:mp)
+        {
+            int product = it.first;
+            int freq = it.second;
+
+            count += (freq * (freq-1) ) / 2;
         }
         return count*8;
     }
