@@ -5,15 +5,14 @@ public:
         vector<int> result(n);
 
         unordered_map<int, int> colormp; //color -> count
-        
-        vector<int> ballArr(limit+1, -1); //ball[i] = x; ith ball has x color
+        unordered_map<int, int> ballmp; //ball -> color
 
         for(int i = 0; i < n; i++) {
             int ball  = queries[i][0];
             int color = queries[i][1];
 
-            if(ballArr[ball] != -1) { //already colored ball
-                int prevColor = ballArr[ball];
+            if(ballmp.count(ball)) { //already colored ball
+                int prevColor = ballmp[ball];
                 colormp[prevColor]--;
 
                 if(colormp[prevColor] == 0) {
@@ -21,7 +20,7 @@ public:
                 }
             }
 
-            ballArr[ball] = color;
+            ballmp[ball] = color;
             colormp[color]++;
 
             result[i] = colormp.size();
