@@ -9,7 +9,7 @@ public:
         for(int i=0;i<n;i++){
             sum += nums[i];
 
-            if(sum >maxSum){
+            if(sum > maxSum){
                 maxSum = sum;
             }
     
