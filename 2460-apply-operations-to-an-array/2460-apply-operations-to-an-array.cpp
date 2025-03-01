@@ -10,27 +10,19 @@ public:
             }
         }
 
-        int start = 0;
-        int end = n-1;
-
-        while(start <= end){
-            if(nums[start] == 0 && nums[end] > 0){
-                swap(nums[start++],nums[end--]);
-            }
-
-            else if(nums[start] == 0 && nums[end] == 0){
-                end--;
-            }
-
-            else if(nums[start] > 0 && nums[end] > 0){
-                start++;
-            }
-
-            else if(nums[start] > 0 && nums[end] == 0){
-                start++;
-                end--;
+        int j = 0;
+        for(int i=0;i<n;i++){
+            if(nums[i] > 0){
+                nums[j] = nums[i];
+                j++;
             }
         }
+
+        while(j<n){
+            nums[j] = 0;
+            j++;
+        }
+
         return nums;
     }
 };
