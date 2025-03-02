@@ -7,7 +7,7 @@ public:
 
         vector<vector<int>> result;
 
-        unordered_map <int,int> mp;
+        map <int,int> mp;
 
         for(int i=0;i<m;i++){
             int id = nums1[i][0];
@@ -29,8 +29,6 @@ public:
 
             result.push_back({key, val});
         }
-
-        sort(result.begin(), result.end());
 
         return result;
     }
