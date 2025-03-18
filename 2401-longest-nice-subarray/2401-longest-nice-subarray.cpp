@@ -6,11 +6,11 @@ public:
         int i=0;
         int j=0;
 
-        int result = 0;
-        int mask = 0;
+        int result=0;
+        int mask=0;
 
-        while(j < n){
-            while( (mask & nums[j]) != 0 ){
+        while(j<n){
+            while( (mask & nums[j]) != 0){
                 mask = mask ^ nums[i];
                 i++;
             }
