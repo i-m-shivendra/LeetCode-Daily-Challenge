@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int calculateHeight(TreeNode* root, int diameter){
+    int calculateHeight(TreeNode* root, int& diameter){
         if(root == NULL){
             return 0;
         }
@@ -19,7 +19,7 @@ public:
         int leftHeight = calculateHeight(root->left, diameter);
         int rightHeight = calculateHeight(root->right, diameter);
 
-        diameter = max(diameter, leftHeight + rightHeight);
+        diameter = max(diameter, (leftHeight + rightHeight));
 
         return 1 + max(leftHeight, rightHeight);
     }
