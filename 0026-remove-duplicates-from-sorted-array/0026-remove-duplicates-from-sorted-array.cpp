@@ -6,10 +6,8 @@ public:
         for(int i=0;i<n;i++){
             st.insert(nums[i]);
         }
-
         int k = st.size();
-        
-        int j = 0;
+        int j=0;
         for(auto it : st){
             nums[j] = it;
             j++;
