@@ -7,7 +7,7 @@ public:
             st.insert(nums[i]);
         }
         int k = st.size();
-        int j=0;
+        int j = 0;
         for(auto it : st){
             nums[j] = it;
             j++;
