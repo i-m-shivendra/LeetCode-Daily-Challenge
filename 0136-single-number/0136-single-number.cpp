@@ -1,14 +1,19 @@
 class Solution {
 public:
-    int singleNumber(vector<int>& nums) 
-    {
-        int n = nums.size();
-        
-        for(int i = 0; i < n - 1; i++)
-        {
-            nums[i + 1] = nums[i] ^ nums[i + 1]; 
-        }
-        
-        return nums[n- 1];
+    int singleNumber(vector<int>& nums) {
+       int n = nums.size();
+       map <int, int> mp;
+
+       for(int i=0;i<n;i++){
+        mp[nums[i]]++;
+       }
+
+       for(auto it : mp){
+         if(it.second == 1){
+            return it.first;
+         }
+       }
+
+       return -1;
     }
 };
